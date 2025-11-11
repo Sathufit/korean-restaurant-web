@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const AdminLogin = () => {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
@@ -13,15 +14,17 @@ const AdminLogin = () => {
     setError('');
 
     try {
-      // For demo: username "admin", password "hanguk2024"
-      if (credentials.username === 'admin' && credentials.password === 'hanguk2024') {
-        localStorage.setItem('adminToken', 'demo-token-123');
+      // Call real API
+      const response = await axios.post('http://localhost:5001/api/admin/login', credentials);
+      
+      if (response.data.success && response.data.token) {
+        localStorage.setItem('adminToken', response.data.token);
         navigate('/admin/dashboard');
       } else {
         setError('Invalid credentials');
       }
     } catch (err) {
-      setError('Login failed. Please try again.');
+      setError(err.response?.data?.message || 'Login failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -90,7 +93,7 @@ const AdminLogin = () => {
 
           <div className="mt-6 pt-6 border-t border-charcoal/10 text-center">
             <p className="text-sm text-charcoal/60 font-body">
-              Demo credentials: <span className="font-medium">admin</span> / <span className="font-medium">hanguk2024</span>
+              Default credentials: <span className="font-medium">admin</span> / <span className="font-medium">ChangeMe123!</span>
             </p>
           </div>
         </div>

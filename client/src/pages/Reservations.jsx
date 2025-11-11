@@ -28,7 +28,7 @@ const Reservations = () => {
     setStatus({ type: '', message: '' });
 
     try {
-      const response = await axios.post('http://localhost:5000/api/bookings', formData);
+      const response = await axios.post('http://localhost:5001/api/bookings', formData);
       
       setStatus({
         type: 'success',
