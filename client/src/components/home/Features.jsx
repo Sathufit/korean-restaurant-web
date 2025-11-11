@@ -49,19 +49,20 @@ const Features = () => {
           </h2>
         </div>
 
-        {/* Features Grid - Mobile Responsive */}
+        {/* Features Grid - Enhanced with Staggered Animations */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {features.map((feature, index) => (
             <div 
               key={index}
-              className="group relative bg-charcoal p-6 sm:p-8 lg:p-10 border border-gold/10 hover:border-gold/30 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              className="group relative bg-charcoal p-6 sm:p-8 lg:p-10 border-2 border-gold/10 hover:border-gold/50 transition-all duration-500 shadow-lg hover:shadow-2xl transform hover:-translate-y-2 hover:scale-[1.02] animate-fade-in"
+              style={{ animationDelay: `${index * 100}ms` }}
             >
-              {/* Corner decorations */}
-              <div className="absolute top-0 left-0 w-6 sm:w-8 lg:w-10 h-6 sm:h-8 lg:h-10 border-t-2 border-l-2 border-gold/30 group-hover:border-gold transition-colors duration-300"></div>
-              <div className="absolute bottom-0 right-0 w-6 sm:w-8 lg:w-10 h-6 sm:h-8 lg:h-10 border-b-2 border-r-2 border-gold/30 group-hover:border-gold transition-colors duration-300"></div>
+              {/* Corner decorations with enhanced animation */}
+              <div className="absolute top-0 left-0 w-6 sm:w-8 lg:w-10 h-6 sm:h-8 lg:h-10 border-t-2 border-l-2 border-gold/30 group-hover:border-gold group-hover:w-12 group-hover:h-12 transition-all duration-300"></div>
+              <div className="absolute bottom-0 right-0 w-6 sm:w-8 lg:w-10 h-6 sm:h-8 lg:h-10 border-b-2 border-r-2 border-gold/30 group-hover:border-gold group-hover:w-12 group-hover:h-12 transition-all duration-300"></div>
 
-              {/* Icon */}
-              <div className="text-5xl sm:text-6xl lg:text-7xl mb-4 sm:mb-6 transform group-hover:scale-110 transition-transform duration-300 inline-block">
+              {/* Icon with enhanced animation */}
+              <div className="text-5xl sm:text-6xl lg:text-7xl mb-4 sm:mb-6 transform group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 inline-block">
                 {feature.icon}
               </div>
 
@@ -70,13 +71,18 @@ const Features = () => {
                 {feature.title}
               </h3>
               
-              {/* Underline */}
-              <div className="w-10 sm:w-12 h-0.5 sm:h-1 bg-gold mb-3 sm:mb-4 transform origin-left group-hover:scale-x-150 transition-transform duration-300"></div>
+              {/* Underline with enhanced animation */}
+              <div className="w-10 sm:w-12 h-0.5 sm:h-1 bg-gold mb-3 sm:mb-4 transform origin-left group-hover:w-24 transition-all duration-500"></div>
 
               {/* Description */}
               <p className="text-warm-white/70 font-body text-sm sm:text-base leading-relaxed group-hover:text-warm-white/90 transition-colors duration-300">
                 {feature.description}
               </p>
+
+              {/* Mobile tap indicator */}
+              <div className="md:hidden absolute top-2 right-2 text-xs text-gold/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                👆
+              </div>
             </div>
           ))}
         </div>

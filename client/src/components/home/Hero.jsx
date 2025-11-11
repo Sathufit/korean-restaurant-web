@@ -43,17 +43,17 @@ const Hero = () => {
           Where tradition meets excellence.
         </p>
 
-        {/* CTA buttons - Mobile Responsive */}
+        {/* CTA buttons - Enhanced with Better Touch Targets */}
         <div className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 transition-all duration-700 delay-450 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           <Link 
             to="/reservations"
-            className="px-8 sm:px-10 py-3 sm:py-4 bg-gold text-deep-black font-body font-medium uppercase tracking-wider text-sm hover:bg-gold/90 transition-colors duration-300"
+            className="min-h-[48px] px-8 sm:px-10 py-3 sm:py-4 bg-gold text-deep-black font-body font-medium uppercase tracking-wider text-sm hover:bg-gold/90 hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl touch-manipulation"
           >
             Book a Table
           </Link>
           <Link 
             to="/menu"
-            className="px-8 sm:px-10 py-3 sm:py-4 border-2 border-warm-white/20 text-warm-white font-body font-medium uppercase tracking-wider text-sm hover:border-gold hover:text-gold transition-colors duration-300"
+            className="min-h-[48px] px-8 sm:px-10 py-3 sm:py-4 border-2 border-warm-white/20 text-warm-white font-body font-medium uppercase tracking-wider text-sm hover:border-gold hover:text-gold hover:scale-105 active:scale-95 transition-all duration-300 touch-manipulation"
           >
             View Menu
           </Link>
