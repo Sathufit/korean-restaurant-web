@@ -78,11 +78,6 @@ const Features = () => {
               <p className="text-warm-white/70 font-body text-sm sm:text-base leading-relaxed group-hover:text-warm-white/90 transition-colors duration-300">
                 {feature.description}
               </p>
-
-              {/* Mobile tap indicator */}
-              <div className="md:hidden absolute top-2 right-2 text-xs text-gold/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                👆
-              </div>
             </div>
           ))}
         </div>

@@ -220,7 +220,7 @@ const Menu = () => {
           {/* Mobile scroll indicator */}
           <div className="md:hidden text-center mt-2">
             <span className="text-xs text-charcoal/40 font-body">
-              👈 Swipe for more categories
+              ← Swipe for more categories
             </span>
           </div>
         </div>
@@ -259,17 +259,12 @@ const Menu = () => {
                 <p className="text-charcoal/70 font-body text-sm sm:text-base leading-relaxed">
                   {item.description}
                 </p>
-
-                {/* Mobile tap indicator */}
-                <div className="md:hidden absolute top-2 right-2 text-xs text-gold/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  👆
-                </div>
               </div>
             ))
           ) : (
             <div className="col-span-full text-center py-16">
-              <div className="text-6xl mb-4 animate-bounce-slow">🍽️</div>
-              <p className="text-charcoal/60 font-body text-lg">No items found in this category</p>
+              <p className="text-charcoal/60 font-body text-xl font-semibold mb-2">No items found</p>
+              <p className="text-charcoal/40 font-body">Try selecting a different category</p>
             </div>
           )}
         </div>
@@ -279,7 +274,6 @@ const Menu = () => {
       <div className="bg-deep-black text-warm-white py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-block bg-white/5 backdrop-blur-sm border-2 border-gold/30 px-6 sm:px-8 py-4 sm:py-6 hover:bg-white/10 hover:border-gold/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-            <div className="text-2xl mb-2">ℹ️</div>
             <p className="font-body text-xs sm:text-sm text-warm-white/80 leading-relaxed">
               <span className="text-gold font-semibold text-base">Note:</span> Prices are in AUD. Menu items subject to change.
               <br className="hidden sm:block" />

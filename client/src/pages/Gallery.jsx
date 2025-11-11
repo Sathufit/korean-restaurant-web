@@ -198,14 +198,6 @@ const Gallery = () => {
                   </p>
                 </div>
               </div>
-
-              {/* Tap indicator for mobile */}
-              <div className="absolute top-4 right-4 w-10 h-10 bg-gold/20 rounded-full 
-                            flex items-center justify-center backdrop-blur-sm
-                            opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                            sm:hidden">
-                <span className="text-gold text-xl">👆</span>
-              </div>
             </div>
           ))}
         </div>
@@ -213,8 +205,8 @@ const Gallery = () => {
         {/* No results message */}
         {filteredItems.length === 0 && (
           <div className="text-center py-20">
-            <div className="text-6xl mb-4">🔍</div>
-            <p className="text-charcoal/60 font-body text-lg">No items found in this category</p>
+            <p className="text-charcoal/60 font-body text-xl font-semibold mb-2">No items found</p>
+            <p className="text-charcoal/40 font-body">Try selecting a different category</p>
           </div>
         )}
       </div>
@@ -300,10 +292,12 @@ const Gallery = () => {
         <div className="inline-block bg-white border-2 border-gold/30 px-8 py-4 shadow-lg
                       hover:shadow-xl hover:border-gold/50 transition-all duration-300
                       transform hover:-translate-y-1">
-          <p className="text-sm text-charcoal/70 font-body flex items-center gap-2 justify-center">
-            <span className="text-gold text-lg">ℹ️</span>
-            <span><span className="text-gold font-bold">Note:</span> All images are placeholders. Replace with actual photography.</span>
-          </p>
+          <div className="flex items-center gap-3">
+            <div className="w-1 h-8 bg-gold flex-shrink-0"></div>
+            <p className="text-sm text-charcoal/70 font-body">
+              <span className="text-gold font-bold">Note:</span> All images are placeholders. Replace with actual photography.
+            </p>
+          </div>
         </div>
       </div>
     </div>

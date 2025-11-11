@@ -21,9 +21,9 @@ const Hero = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32 text-center">
         {/* Top label - Mobile Responsive */}
         <div className={`inline-flex items-center gap-2 sm:gap-3 mb-6 sm:mb-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <div className="h-px w-8 sm:w-12 bg-gold"></div>
+          <div className="h-px w-12 sm:w-16 bg-gold"></div>
           <span className="text-gold text-xs font-body uppercase tracking-[0.2em] sm:tracking-[0.25em]">Melbourne</span>
-          <div className="h-px w-8 sm:w-12 bg-gold"></div>
+          <div className="h-px w-12 sm:w-16 bg-gold"></div>
         </div>
 
         {/* Main heading - Mobile Responsive */}
