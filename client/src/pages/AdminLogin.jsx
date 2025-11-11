@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { getApiUrl, logger, STORAGE_KEYS } from '../utils/config';
 
 const AdminLogin = () => {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
@@ -13,17 +14,26 @@ const AdminLogin = () => {
     setIsLoading(true);
     setError('');
 
+    logger.log('🔐 Attempting login with username:', credentials.username);
+
     try {
       // Call real API
-      const response = await axios.post('http://localhost:5001/api/admin/login', credentials);
+      const response = await axios.post(getApiUrl('/admin/login'), credentials);
+      
+      logger.log('✅ Login response:', response.data);
       
       if (response.data.success && response.data.token) {
-        localStorage.setItem('adminToken', response.data.token);
+        logger.log('💾 Saving token to localStorage');
+        localStorage.setItem(STORAGE_KEYS.ADMIN_TOKEN, response.data.token);
+        logger.log('🔍 Token saved, length:', response.data.token.length);
+        logger.log('🚀 Navigating to dashboard');
         navigate('/admin/dashboard');
       } else {
+        logger.error('❌ Login successful but no token received');
         setError('Invalid credentials');
       }
     } catch (err) {
+      logger.error('❌ Login error:', err.response?.data || err.message);
       setError(err.response?.data?.message || 'Login failed. Please try again.');
     } finally {
       setIsLoading(false);
@@ -93,7 +103,7 @@ const AdminLogin = () => {
 
           <div className="mt-6 pt-6 border-t border-charcoal/10 text-center">
             <p className="text-sm text-charcoal/60 font-body">
-              Default credentials: <span className="font-medium">admin</span> / <span className="font-medium">ChangeMe123!</span>
+              Contact your system administrator for login credentials
             </p>
           </div>
         </div>

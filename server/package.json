@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node index-production.js",
+    "dev": "nodemon index-production.js",
+    "dev-old": "nodemon index.js",
+    "create-admin": "node scripts/create-admin.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

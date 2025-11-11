@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { getApiUrl, logger, RESTAURANT_CONFIG } from '../utils/config';
 
 const Reservations = () => {
   const [formData, setFormData] = useState({
@@ -28,7 +29,17 @@ const Reservations = () => {
     setStatus({ type: '', message: '' });
 
     try {
-      const response = await axios.post('http://localhost:5001/api/bookings', formData);
+      // Convert guests to integer before sending
+      const bookingData = {
+        ...formData,
+        guests: parseInt(formData.guests, 10)
+      };
+      
+      logger.log('📤 Sending booking data:', bookingData);
+      
+      const response = await axios.post(getApiUrl('/bookings'), bookingData);
+      
+      logger.log('✅ Booking response:', response.data);
       
       setStatus({
         type: 'success',
@@ -46,9 +57,10 @@ const Reservations = () => {
         specialRequests: ''
       });
     } catch (error) {
+      logger.error('❌ Booking error:', error.response?.data);
       setStatus({
         type: 'error',
-        message: error.response?.data?.message || 'Failed to submit reservation. Please try again.'
+        message: error.response?.data?.message || error.response?.data?.errors?.[0]?.msg || 'Failed to submit reservation. Please try again.'
       });
     } finally {
       setIsSubmitting(false);
@@ -60,11 +72,6 @@ const Reservations = () => {
     const today = new Date();
     return today.toISOString().split('T')[0];
   };
-
-  const timeSlots = [
-    '17:30', '18:00', '18:30', '19:00', '19:30', 
-    '20:00', '20:30', '21:00', '21:30', '22:00'
-  ];
 
   return (
     <div className="min-h-screen bg-warm-white">
@@ -199,7 +206,7 @@ const Reservations = () => {
                   className="w-full px-4 py-3 border border-charcoal/20 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold font-body transition-colors bg-white"
                 >
                   <option value="">Select a time</option>
-                  {timeSlots.map(slot => (
+                  {RESTAURANT_CONFIG.TIME_SLOTS.map(slot => (
                     <option key={slot} value={slot}>{slot}</option>
                   ))}
                 </select>

@@ -159,10 +159,14 @@ app.post('/api/bookings', validateBooking, async (req, res) => {
       status: 'pending'
     });
     
+    // Convert ObjectId to string
+    const bookingData = booking.toObject();
+    bookingData._id = bookingData._id.toString();
+    
     res.status(201).json({
       success: true,
       message: 'Booking created successfully! We will contact you shortly to confirm.',
-      booking: sanitizeOutput(booking.toObject())
+      booking: sanitizeOutput(bookingData)
     });
     
   } catch (error) {
@@ -283,6 +287,37 @@ app.post('/api/admin/logout', authenticateToken, async (req, res) => {
   }
 });
 
+// Get admin profile (PROTECTED)
+app.get('/api/admin/profile', authenticateToken, async (req, res) => {
+  try {
+    const admin = await Admin.findById(req.admin._id).select('-password');
+    
+    if (!admin) {
+      return res.status(404).json({
+        success: false,
+        message: 'Admin not found'
+      });
+    }
+    
+    res.json({
+      success: true,
+      admin: {
+        username: admin.username,
+        email: admin.email,
+        role: admin.role,
+        createdAt: admin.createdAt,
+        lastLogin: admin.lastLogin
+      }
+    });
+  } catch (error) {
+    console.error('Get profile error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get profile'
+    });
+  }
+});
+
 // ===========================
 // PROTECTED ADMIN ROUTES
 // ===========================
@@ -310,9 +345,24 @@ app.get('/api/bookings', authenticateToken, async (req, res) => {
     
     const count = await Booking.countDocuments(query);
     
+    // Convert ObjectIds and Dates to strings for proper JSON serialization
+    const bookingsData = bookings.map(b => {
+      const obj = b.toObject();
+      obj._id = obj._id.toString();
+      obj.id = obj._id; // Add string id for compatibility
+      obj.date = obj.date ? obj.date.toISOString().split('T')[0] : obj.date; // Format date as YYYY-MM-DD
+      if (obj.confirmedBy && obj.confirmedBy._id) {
+        obj.confirmedBy._id = obj.confirmedBy._id.toString();
+      }
+      if (obj.createdAt) obj.createdAt = obj.createdAt.toISOString();
+      if (obj.updatedAt) obj.updatedAt = obj.updatedAt.toISOString();
+      if (obj.confirmedAt) obj.confirmedAt = obj.confirmedAt.toISOString();
+      return obj;
+    });
+    
     res.json({
       success: true,
-      bookings: sanitizeOutput(bookings.map(b => b.toObject())),
+      bookings: sanitizeOutput(bookingsData),
       count,
       total: count
     });
@@ -339,9 +389,21 @@ app.get('/api/bookings/:id', authenticateToken, async (req, res) => {
       });
     }
     
+    // Convert ObjectIds and Dates to strings
+    const bookingData = booking.toObject();
+    bookingData._id = bookingData._id.toString();
+    bookingData.id = bookingData._id; // Add string id
+    bookingData.date = bookingData.date ? bookingData.date.toISOString().split('T')[0] : bookingData.date;
+    if (bookingData.confirmedBy && bookingData.confirmedBy._id) {
+      bookingData.confirmedBy._id = bookingData.confirmedBy._id.toString();
+    }
+    if (bookingData.createdAt) bookingData.createdAt = bookingData.createdAt.toISOString();
+    if (bookingData.updatedAt) bookingData.updatedAt = bookingData.updatedAt.toISOString();
+    if (bookingData.confirmedAt) bookingData.confirmedAt = bookingData.confirmedAt.toISOString();
+    
     res.json({
       success: true,
-      booking: sanitizeOutput(booking.toObject())
+      booking: sanitizeOutput(bookingData)
     });
     
   } catch (error) {
@@ -479,17 +541,13 @@ const startServer = async () => {
     // Connect to MongoDB first
     await connectDB();
     
-    // Create default admin if none exists
+    // Check if any admin exists
     const adminCount = await Admin.countDocuments();
     if (adminCount === 0) {
-      await Admin.create({
-        username: 'admin',
-        password: 'ChangeMe123!',
-        email: 'admin@hangukbites.com',
-        role: 'admin'
-      });
-      console.log('⚠️  Default admin created - Username: admin, Password: ChangeMe123!');
-      console.log('⚠️  CHANGE THIS PASSWORD IMMEDIATELY!');
+      console.log('\n⚠️  WARNING: No admin users found in database!');
+      console.log('📝 Please create an admin user by running:');
+      console.log('   npm run create-admin\n');
+      console.log('⏸️  Server will continue, but you won\'t be able to login until an admin is created.\n');
     }
     
     // Start Express server

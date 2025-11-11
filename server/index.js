@@ -147,20 +147,17 @@ app.delete('/api/bookings/:id', (req, res) => {
   res.json({ message: 'Booking deleted successfully' });
 });
 
-// Admin login (demo only - in production use proper auth)
+// Admin login (DEPRECATED - Use index-production.js for real authentication)
 app.post('/api/admin/login', (req, res) => {
   const { username, password } = req.body;
   
-  // Demo credentials
-  if (username === 'admin' && password === 'hanguk2024') {
-    res.json({
-      message: 'Login successful',
-      token: 'demo-token-123',
-      user: { username: 'admin' }
-    });
-  } else {
-    res.status(401).json({ message: 'Invalid credentials' });
-  }
+  // This is a development-only server with in-memory storage
+  // For production, use: npm start (which runs index-production.js)
+  res.status(503).json({
+    error: 'Authentication not available in development mode',
+    message: 'Please use the production server (npm start) for authentication',
+    note: 'This development server is for testing UI only - no real authentication'
+  });
 });
 
 // Health check

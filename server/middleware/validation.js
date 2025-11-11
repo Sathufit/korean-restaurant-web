@@ -24,7 +24,7 @@ const validateBooking = [
     .trim()
     .notEmpty().withMessage('Name is required')
     .isLength({ min: 2, max: 100 }).withMessage('Name must be between 2-100 characters')
-    .matches(/^[a-zA-Z\s'-]+$/).withMessage('Name can only contain letters, spaces, hyphens and apostrophes'),
+    .matches(/^[a-zA-Z\s.'-]+$/).withMessage('Name can only contain letters, spaces, periods, hyphens and apostrophes'),
   
   body('email')
     .trim()
@@ -91,7 +91,8 @@ const validateBooking = [
  */
 const validateBookingUpdate = [
   param('id')
-    .isInt({ min: 1 }).withMessage('Invalid booking ID'),
+    .notEmpty().withMessage('Booking ID is required')
+    .isMongoId().withMessage('Invalid booking ID format'),
   
   body('status')
     .notEmpty().withMessage('Status is required')
