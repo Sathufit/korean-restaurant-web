@@ -245,9 +245,10 @@ const AdminDashboard = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-warm-white flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin h-12 w-12 border-4 border-gold border-t-transparent rounded-full mx-auto mb-4"></div>
-          <p className="text-charcoal font-body">Loading bookings...</p>
+        <div className="text-center animate-fade-in">
+          <div className="animate-spin h-16 w-16 border-4 border-gold border-t-transparent rounded-full mx-auto mb-6"></div>
+          <p className="text-charcoal font-body text-lg">Loading bookings...</p>
+          <p className="text-charcoal/60 font-body text-sm mt-2">Please wait</p>
         </div>
       </div>
     );
@@ -255,26 +256,29 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen bg-warm-white">
-      {/* Header */}
-      <div className="bg-deep-black text-warm-white py-6 px-4 sm:px-6 lg:px-8">
+      {/* Header - Enhanced */}
+      <div className="bg-deep-black text-warm-white py-6 px-4 sm:px-6 lg:px-8 shadow-xl">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div>
-            <h1 className="text-3xl sm:text-4xl font-heading font-bold">Admin Dashboard</h1>
+          <div className="animate-fade-in">
+            <div className="flex items-center gap-3 mb-2">
+              <span className="text-3xl">📊</span>
+              <h1 className="text-3xl sm:text-4xl font-heading font-bold">Admin Dashboard</h1>
+            </div>
             <p className="text-warm-white/60 font-body mt-1">Manage your reservations</p>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 w-full sm:w-auto animate-slide-in-right">
             {adminProfile && (
               <button
                 onClick={() => setShowProfile(!showProfile)}
-                className="px-4 py-2 bg-charcoal text-warm-white font-body font-semibold uppercase tracking-wider hover:bg-charcoal/80 transition-colors flex items-center gap-2"
+                className="min-h-[48px] px-4 py-2 bg-charcoal text-warm-white font-body font-semibold uppercase tracking-wider hover:bg-charcoal/80 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2 shadow-md"
               >
-                <span className="text-gold">👤</span>
+                <span className="text-gold text-xl">👤</span>
                 <span className="hidden sm:inline">{adminProfile.username}</span>
               </button>
             )}
             <button
               onClick={handleLogout}
-              className="px-6 py-2 bg-gold text-deep-black font-body font-semibold uppercase tracking-wider hover:bg-gold/90 transition-colors"
+              className="min-h-[48px] flex-1 sm:flex-none px-6 py-2 bg-gold text-deep-black font-body font-semibold uppercase tracking-wider hover:bg-gold/90 hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg"
             >
               Logout
             </button>
@@ -283,33 +287,36 @@ const AdminDashboard = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Profile Card */}
+        {/* Profile Card - Enhanced */}
         {showProfile && adminProfile && (
-          <div className="bg-white shadow-lg mb-6 p-6 border-l-4 border-gold">
+          <div className="bg-white shadow-2xl mb-6 p-6 border-l-4 border-gold animate-slide-in-right">
             <div className="flex justify-between items-start mb-4">
-              <h2 className="text-2xl font-heading font-bold text-deep-black">Admin Profile</h2>
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">👤</span>
+                <h2 className="text-2xl font-heading font-bold text-deep-black">Admin Profile</h2>
+              </div>
               <button
                 onClick={() => setShowProfile(false)}
-                className="text-charcoal hover:text-deep-black text-2xl"
+                className="min-h-[48px] min-w-[48px] flex items-center justify-center text-charcoal hover:text-deep-black hover:bg-charcoal/5 transition-all duration-300 text-3xl hover:rotate-90"
               >
                 ×
               </button>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <p className="text-sm font-body text-charcoal/60 uppercase tracking-wide mb-1">Username</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="bg-warm-white/50 p-4 hover:bg-warm-white transition-colors duration-300">
+                <p className="text-xs font-body text-charcoal/60 uppercase tracking-wide mb-2">Username</p>
                 <p className="text-lg font-body text-deep-black font-semibold">{adminProfile.username}</p>
               </div>
-              <div>
-                <p className="text-sm font-body text-charcoal/60 uppercase tracking-wide mb-1">Email</p>
-                <p className="text-lg font-body text-deep-black">{adminProfile.email}</p>
+              <div className="bg-warm-white/50 p-4 hover:bg-warm-white transition-colors duration-300">
+                <p className="text-xs font-body text-charcoal/60 uppercase tracking-wide mb-2">Email</p>
+                <p className="text-lg font-body text-deep-black break-all">{adminProfile.email}</p>
               </div>
-              <div>
-                <p className="text-sm font-body text-charcoal/60 uppercase tracking-wide mb-1">Role</p>
+              <div className="bg-warm-white/50 p-4 hover:bg-warm-white transition-colors duration-300">
+                <p className="text-xs font-body text-charcoal/60 uppercase tracking-wide mb-2">Role</p>
                 <p className="text-lg font-body text-deep-black capitalize">{adminProfile.role}</p>
               </div>
-              <div>
-                <p className="text-sm font-body text-charcoal/60 uppercase tracking-wide mb-1">Account Created</p>
+              <div className="bg-warm-white/50 p-4 hover:bg-warm-white transition-colors duration-300">
+                <p className="text-xs font-body text-charcoal/60 uppercase tracking-wide mb-2">Account Created</p>
                 <p className="text-lg font-body text-deep-black">
                   {new Date(adminProfile.createdAt).toLocaleDateString()}
                 </p>
@@ -318,45 +325,61 @@ const AdminDashboard = () => {
           </div>
         )}
 
-        {/* Stats */}
+        {/* Stats - Enhanced */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white p-6 shadow-md">
-            <p className="text-sm font-body text-charcoal/60 uppercase tracking-wide">Total</p>
-            <p className="text-3xl font-heading font-bold text-deep-black mt-2">{bookings.length}</p>
+          <div className="bg-white p-6 shadow-md hover:shadow-xl transition-all duration-300 border-l-4 border-gold hover:scale-105 animate-fade-in">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-xs font-body text-charcoal/60 uppercase tracking-wide">Total</p>
+              <span className="text-2xl">📋</span>
+            </div>
+            <p className="text-4xl font-heading font-bold text-deep-black">{bookings.length}</p>
           </div>
-          <div className="bg-white p-6 shadow-md">
-            <p className="text-sm font-body text-charcoal/60 uppercase tracking-wide">Pending</p>
-            <p className="text-3xl font-heading font-bold text-yellow-600 mt-2">
+          <div className="bg-white p-6 shadow-md hover:shadow-xl transition-all duration-300 border-l-4 border-yellow-400 hover:scale-105 animate-fade-in" style={{ animationDelay: '50ms' }}>
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-xs font-body text-charcoal/60 uppercase tracking-wide">Pending</p>
+              <span className="text-2xl">⏳</span>
+            </div>
+            <p className="text-4xl font-heading font-bold text-yellow-600">
               {bookings.filter(b => b.status === BOOKING_STATUS.PENDING).length}
             </p>
           </div>
-          <div className="bg-white p-6 shadow-md">
-            <p className="text-sm font-body text-charcoal/60 uppercase tracking-wide">Confirmed</p>
-            <p className="text-3xl font-heading font-bold text-green-600 mt-2">
+          <div className="bg-white p-6 shadow-md hover:shadow-xl transition-all duration-300 border-l-4 border-green-400 hover:scale-105 animate-fade-in" style={{ animationDelay: '100ms' }}>
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-xs font-body text-charcoal/60 uppercase tracking-wide">Confirmed</p>
+              <span className="text-2xl">✅</span>
+            </div>
+            <p className="text-4xl font-heading font-bold text-green-600">
               {bookings.filter(b => b.status === BOOKING_STATUS.CONFIRMED).length}
             </p>
           </div>
-          <div className="bg-white p-6 shadow-md">
-            <p className="text-sm font-body text-charcoal/60 uppercase tracking-wide">Cancelled</p>
-            <p className="text-3xl font-heading font-bold text-red-600 mt-2">
+          <div className="bg-white p-6 shadow-md hover:shadow-xl transition-all duration-300 border-l-4 border-red-400 hover:scale-105 animate-fade-in" style={{ animationDelay: '150ms' }}>
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-xs font-body text-charcoal/60 uppercase tracking-wide">Cancelled</p>
+              <span className="text-2xl">❌</span>
+            </div>
+            <p className="text-4xl font-heading font-bold text-red-600">
               {bookings.filter(b => b.status === BOOKING_STATUS.CANCELLED).length}
             </p>
           </div>
         </div>
 
-        {/* Error Message */}
+        {/* Error Message - Enhanced */}
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-800 font-body">
-            {error}
+          <div className="mb-6 p-4 bg-red-50 border-2 border-red-300 text-red-800 font-body animate-slide-in-right flex items-center gap-3">
+            <span className="text-2xl">⚠️</span>
+            <span>{error}</span>
           </div>
         )}
 
-        {/* Filters */}
-        <div className="bg-white shadow-md p-4 sm:p-6 mb-6">
-          <h2 className="text-lg font-heading font-bold text-deep-black mb-4">Filter Bookings</h2>
+        {/* Filters - Enhanced with Better Touch Targets */}
+        <div className="bg-white shadow-lg p-4 sm:p-6 mb-6 border-t-4 border-gold">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-2xl">🔍</span>
+            <h2 className="text-lg font-heading font-bold text-deep-black">Filter Bookings</h2>
+          </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Search */}
+            {/* Search - Enhanced */}
             <div>
               <label className="block text-sm font-body font-medium text-charcoal mb-2">
                 Search
@@ -366,11 +389,11 @@ const AdminDashboard = () => {
                 placeholder="Name or email..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-3 py-2 border border-charcoal/20 focus:border-gold focus:ring-1 focus:ring-gold font-body"
+                className="w-full min-h-[48px] px-4 py-3 border-2 border-charcoal/20 focus:border-gold focus:ring-4 focus:ring-gold/20 font-body transition-all duration-300 hover:border-charcoal/40"
               />
             </div>
 
-            {/* Status Filter */}
+            {/* Status Filter - Enhanced */}
             <div>
               <label className="block text-sm font-body font-medium text-charcoal mb-2">
                 Status
@@ -378,7 +401,7 @@ const AdminDashboard = () => {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full px-3 py-2 border border-charcoal/20 focus:border-gold focus:ring-1 focus:ring-gold font-body"
+                className="w-full min-h-[48px] px-4 py-3 border-2 border-charcoal/20 focus:border-gold focus:ring-4 focus:ring-gold/20 font-body transition-all duration-300 hover:border-charcoal/40"
               >
                 <option value="all">All Statuses</option>
                 {Object.entries(STATUS_CONFIG).map(([status, config]) => (
@@ -387,7 +410,7 @@ const AdminDashboard = () => {
               </select>
             </div>
 
-            {/* Date Filter */}
+            {/* Date Filter - Enhanced */}
             <div>
               <label className="block text-sm font-body font-medium text-charcoal mb-2">
                 Date
@@ -395,7 +418,7 @@ const AdminDashboard = () => {
               <select
                 value={dateFilter}
                 onChange={(e) => setDateFilter(e.target.value)}
-                className="w-full px-3 py-2 border border-charcoal/20 focus:border-gold focus:ring-1 focus:ring-gold font-body"
+                className="w-full min-h-[48px] px-4 py-3 border-2 border-charcoal/20 focus:border-gold focus:ring-4 focus:ring-gold/20 font-body transition-all duration-300 hover:border-charcoal/40"
               >
                 <option value="all">All Dates</option>
                 <option value="today">Today</option>
@@ -404,7 +427,7 @@ const AdminDashboard = () => {
               </select>
             </div>
 
-            {/* Clear Filters */}
+            {/* Clear Filters - Enhanced */}
             <div className="flex items-end">
               <button
                 onClick={() => {
@@ -412,108 +435,131 @@ const AdminDashboard = () => {
                   setStatusFilter('all');
                   setDateFilter('all');
                 }}
-                className="w-full px-4 py-2 bg-charcoal text-warm-white font-body font-semibold uppercase tracking-wider hover:bg-deep-black transition-colors"
+                className="w-full min-h-[48px] px-4 py-3 bg-charcoal text-warm-white font-body font-semibold uppercase tracking-wider hover:bg-deep-black hover:scale-[1.02] active:scale-95 transition-all duration-300 shadow-md hover:shadow-lg touch-manipulation"
               >
                 Clear Filters
               </button>
             </div>
           </div>
 
-          {/* Results count */}
-          <div className="mt-4 pt-4 border-t border-charcoal/10">
-            <p className="text-sm font-body text-charcoal/60">
-              Showing <span className="font-semibold text-deep-black">{filteredBookings.length}</span> of{' '}
-              <span className="font-semibold text-deep-black">{bookings.length}</span> bookings
+          {/* Results count - Enhanced */}
+          <div className="mt-4 pt-4 border-t-2 border-charcoal/10">
+            <p className="text-sm font-body text-charcoal/60 flex items-center gap-2">
+              <span>📊</span>
+              <span>
+                Showing <span className="font-semibold text-deep-black text-base">{filteredBookings.length}</span> of{' '}
+                <span className="font-semibold text-deep-black text-base">{bookings.length}</span> bookings
+              </span>
             </p>
           </div>
         </div>
 
-        {/* Bookings List */}
-        <div className="bg-white shadow-md">
-          <div className="px-4 sm:px-6 py-4 border-b border-charcoal/10">
-            <h2 className="text-xl font-heading font-bold text-deep-black">All Reservations</h2>
+        {/* Bookings List - Enhanced */}
+        <div className="bg-white shadow-xl border-t-4 border-gold">
+          <div className="px-4 sm:px-6 py-5 border-b-2 border-charcoal/10 bg-warm-white/30">
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">📋</span>
+              <h2 className="text-xl font-heading font-bold text-deep-black">All Reservations</h2>
+            </div>
           </div>
 
           {filteredBookings.length === 0 ? (
-            <div className="p-12 text-center">
-              <p className="text-charcoal/60 font-body">
+            <div className="p-16 text-center animate-fade-in">
+              <div className="text-7xl mb-4 animate-bounce-slow">🍽️</div>
+              <p className="text-charcoal/60 font-body text-lg">
                 {bookings.length === 0 ? 'No bookings yet' : 'No bookings match your filters'}
+              </p>
+              <p className="text-charcoal/40 font-body text-sm mt-2">
+                {bookings.length === 0 ? 'New reservations will appear here' : 'Try adjusting your filters'}
               </p>
             </div>
           ) : (
-            <div className="divide-y divide-charcoal/10">
-              {filteredBookings.map((booking) => (
-                <div key={booking._id} className="p-4 sm:p-6 hover:bg-warm-white/50 transition-colors">
+            <div className="divide-y-2 divide-charcoal/10">
+              {filteredBookings.map((booking, index) => (
+                <div 
+                  key={booking._id} 
+                  className="p-4 sm:p-6 hover:bg-warm-white/70 transition-all duration-300 animate-fade-in border-l-4 border-transparent hover:border-gold"
+                  style={{ animationDelay: `${index * 30}ms` }}
+                >
                   <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                    {/* Booking Info */}
+                    {/* Booking Info - Enhanced */}
                     <div className="flex-1 space-y-3">
                       <div className="flex flex-wrap items-center gap-3">
                         <h3 className="text-lg font-body font-semibold text-deep-black">{booking.name}</h3>
-                        <span className={`px-3 py-1 text-xs font-body font-medium uppercase tracking-wide border ${getStatusColor(booking.status)}`}>
+                        <span className={`px-3 py-1.5 text-xs font-body font-medium uppercase tracking-wide border-2 ${getStatusColor(booking.status)} hover:scale-105 transition-transform duration-300`}>
                           {booking.status}
                         </span>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2 text-sm font-body text-charcoal/70">
-                        <div>
-                          <span className="font-medium text-charcoal">Email:</span> {booking.email}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 text-sm font-body text-charcoal/70">
+                        <div className="flex items-center gap-2">
+                          <span className="text-base">📧</span>
+                          <span><span className="font-medium text-charcoal">Email:</span> {booking.email}</span>
                         </div>
-                        <div>
-                          <span className="font-medium text-charcoal">Phone:</span> {booking.phone}
+                        <div className="flex items-center gap-2">
+                          <span className="text-base">📱</span>
+                          <span><span className="font-medium text-charcoal">Phone:</span> {booking.phone}</span>
                         </div>
-                        <div>
-                          <span className="font-medium text-charcoal">Guests:</span> {booking.guests}
+                        <div className="flex items-center gap-2">
+                          <span className="text-base">👥</span>
+                          <span><span className="font-medium text-charcoal">Guests:</span> {booking.guests}</span>
                         </div>
-                        <div>
-                          <span className="font-medium text-charcoal">Date:</span> {
+                        <div className="flex items-center gap-2">
+                          <span className="text-base">📅</span>
+                          <span><span className="font-medium text-charcoal">Date:</span> {
                             typeof booking.date === 'string' 
                               ? booking.date 
                               : booking.date && new Date(booking.date).toLocaleDateString()
-                          }
+                          }</span>
                         </div>
-                        <div>
-                          <span className="font-medium text-charcoal">Time:</span> {booking.time}
+                        <div className="flex items-center gap-2">
+                          <span className="text-base">🕐</span>
+                          <span><span className="font-medium text-charcoal">Time:</span> {booking.time}</span>
                         </div>
-                        <div>
-                          <span className="font-medium text-charcoal">ID:</span> #{
+                        <div className="flex items-center gap-2">
+                          <span className="text-base">🔖</span>
+                          <span><span className="font-medium text-charcoal">ID:</span> #{
                             typeof booking._id === 'string' 
                               ? booking._id.slice(-8) 
                               : booking.id?.slice(-8) || 'N/A'
-                          }
+                          }</span>
                         </div>
                       </div>
 
                       {booking.specialRequests && (
-                        <div className="text-sm font-body">
-                          <span className="font-medium text-charcoal">Special Requests:</span>
-                          <p className="text-charcoal/70 mt-1">{booking.specialRequests}</p>
+                        <div className="text-sm font-body bg-warm-white/50 p-3 border-l-4 border-gold/30">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-base">💬</span>
+                            <span className="font-medium text-charcoal">Special Requests:</span>
+                          </div>
+                          <p className="text-charcoal/70 pl-6">{booking.specialRequests}</p>
                         </div>
                       )}
                     </div>
 
-                    {/* Actions */}
-                    <div className="flex flex-row lg:flex-col gap-2 lg:min-w-[140px]">
+                    {/* Actions - Enhanced with Better Touch Targets */}
+                    <div className="flex flex-row lg:flex-col gap-2 lg:min-w-[160px]">
                       {booking.status === 'pending' && (
                         <button
                           onClick={() => handleStatusUpdate(booking._id, 'confirmed')}
-                          className="flex-1 lg:flex-none px-4 py-2 bg-green-600 text-white text-sm font-body font-medium uppercase tracking-wide hover:bg-green-700 transition-colors"
+                          className="flex-1 lg:flex-none min-h-[48px] px-5 py-3 bg-green-600 text-white text-sm font-body font-medium uppercase tracking-wide hover:bg-green-700 hover:scale-105 active:scale-95 transition-all duration-300 shadow-md hover:shadow-lg touch-manipulation"
                         >
-                          Confirm
+                          ✓ Confirm
                         </button>
                       )}
                       {booking.status === 'confirmed' && (
                         <button
                           onClick={() => handleStatusUpdate(booking._id, 'cancelled')}
-                          className="flex-1 lg:flex-none px-4 py-2 bg-yellow-600 text-white text-sm font-body font-medium uppercase tracking-wide hover:bg-yellow-700 transition-colors"
+                          className="flex-1 lg:flex-none min-h-[48px] px-5 py-3 bg-yellow-600 text-white text-sm font-body font-medium uppercase tracking-wide hover:bg-yellow-700 hover:scale-105 active:scale-95 transition-all duration-300 shadow-md hover:shadow-lg touch-manipulation"
                         >
-                          Cancel
+                          ⊘ Cancel
                         </button>
                       )}
                       <button
                         onClick={() => handleDelete(booking._id)}
-                        className="flex-1 lg:flex-none px-4 py-2 bg-red-600 text-white text-sm font-body font-medium uppercase tracking-wide hover:bg-red-700 transition-colors"
+                        className="flex-1 lg:flex-none min-h-[48px] px-5 py-3 bg-red-600 text-white text-sm font-body font-medium uppercase tracking-wide hover:bg-red-700 hover:scale-105 active:scale-95 transition-all duration-300 shadow-md hover:shadow-lg touch-manipulation"
                       >
-                        Delete
+                        🗑 Delete
                       </button>
                     </div>
                   </div>
