@@ -2,6 +2,22 @@
 
 A sophisticated, authentic Korean restaurant website built with modern web technologies. Features a premium design that blends traditional Korean cultural elements with contemporary fine dining aesthetics.
 
+## 🚀 Quick Deploy
+
+**Deploy to Vercel in 5 minutes!**
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Sathufit/korean-restaurant-web)
+
+📖 **Full Deployment Guide**: See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete instructions.
+
+### Quick Start
+1. **Frontend**: Deploy to Vercel (automatic)
+2. **Backend**: Deploy to Render.com or Railway
+3. **Database**: Already configured with MongoDB Atlas
+4. **Admin**: Login at `/admin/login` (username: `admin`, password: `HanGuk@2024!`)
+
+---
+
 ## 🎨 Design Philosophy
 
 - **Authentic Korean Culture**: Warm, natural tones inspired by traditional Korean aesthetics

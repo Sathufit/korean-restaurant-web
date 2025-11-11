@@ -1,0 +1,22 @@
+# Server files (not needed for frontend deployment)
+server/
+
+# Documentation
+*.md
+!README.md
+
+# Development files
+.git/
+.vscode/
+.idea/
+
+# Environment files (use Vercel dashboard instead)
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+
+# Testing
+coverage/
